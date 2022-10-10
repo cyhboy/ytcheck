@@ -67,7 +67,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, info, tab) {
         // chrome.action.getBadgeBackgroundColor({}, (res) => {
         //     console.log(JSON.stringify(res))
         // })
-        
+
         try {
             if (tab.url.startsWith('https://www.youtube.com/playlist?list=')) {
                 console.log('get the youtube playlist linkage')
@@ -118,9 +118,8 @@ async function reBadge(activeInfo) {
                 chrome.action.setBadgeBackgroundColor({ color: [0, 0, 0, 0] }, () => { })
                 chrome.action.setTitle({ title: '' }, () => { })
             }
+            console.log('Success to reBadge for ' + tab.url)
         })
-
-        console.log('Success to reBadge for ' + tab.url)
     } catch (error) {
         console.error(error)
     }
