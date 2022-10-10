@@ -18,12 +18,6 @@ chrome.storage.local.get(['domContent'], function (result) {
 
     console.log(myFile)
 
-
-    // chrome.storage.local.set({ 'output': output, 'color': color }, function () {
-    //     console.log('output and color is set', output, color)
-    //     // window.close()
-    // })
-
     chrome.runtime.getPackageDirectoryEntry(function (storageRootEntry) {
         storageRootEntry.getFile(myFile, {
         }, function (fileEntry) {
@@ -62,10 +56,6 @@ chrome.storage.local.get(['domContent'], function (result) {
                     window.close()
                 })
 
-                // chrome.storage.local.set({ 'color': color }, function () {
-                //     console.log('color is set again', color)
-                //     // window.close()
-                // })
             })
         }, function () {
             let output = 'ng'
@@ -78,47 +68,9 @@ chrome.storage.local.get(['domContent'], function (result) {
         })
 
 
-        // fileExists(storageRootEntry, myFile, function (isExist) {
-
-
-        //     if (isExist) {
-        //         console.log('file do exists')
-        //         // alert("file do exists")
-        //         // if (confirm("file do exists")) {
-        //         //     window.close()
-        //         // } else {
-        //         //     window.close()
-        //         output = 'ok'
-
-
-
-
-        //     } else {
-        //         console.log('file do not exists')
-        //         // alert("file do not exists")
-        //         output = 'ng'
-        //         color = 'red'
-        //     }
-
-
-        // })
-
     })
 
 
-    // setTimeout(() => {
-    //     window.close()
-    // }, 3000)
 })
 
 
-
-// function fileExists(storageRootEntry, fileName, callback) {
-//     storageRootEntry.getFile(fileName, {
-//         create: false
-//     }, function () {
-//         callback(true)
-//     }, function () {
-//         callback(false)
-//     })
-// }
