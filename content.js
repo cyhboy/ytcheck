@@ -1,3 +1,4 @@
+/* eslint-disable no-misleading-character-class */
 /* eslint-disable no-undef */
 
 // Listen for messages
@@ -41,9 +42,12 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
             title = document.querySelector('#title > yt-formatted-string > a').text
         }
 
-        author = author.replace(/[/\\?\-，, +()（）%*：:|"<>]/g, '')
-        title = title.replace(/[/\\?\-，, +()（）%*：:|"<>]/g, '')
+        author = author.replace(/[/\\?\-👨‍💻 ，, +()（）.%*：:|"<>]/g, '')
+        title = title.replace(/[/\\?\-👨‍💻 ，, +()（）.%*：:|"<>]/g, '')
 
+        // author = author.replace(/[^\w\s]/gi, '')
+        // title = title.replace(/[^\w\s]/gi, '')
+        
         console.log('author: ', author)
         console.log('title: ', title)
 
@@ -80,7 +84,9 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
 
         title = msg.linkage
 
-        author = author.replace(/[/\\?\-，, +()（）%*：:|"<>]/g, '')
+        author = author.replace(/[/\\?\-👨‍💻 ，, +()（）.%*：:|"<>]/g, '')
+        // author = author.replace(/[^\w\s]/gi, '')
+
         let loc = title.lastIndexOf('/')
         title = title.slice(loc + 1)
 
