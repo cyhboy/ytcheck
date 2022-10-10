@@ -16,9 +16,9 @@ chrome.storage.local.get(['domUrl'], function (result) {
     // openss://C:/CHROME_SPACE/ytcheck/learn/窃客学院_安卓必学之MVCMVPMVVMNDK和JNcmake快速入门Android动画AndroidmustlearnMVCMVPMVVMNDKandJNcmakequickstartAndroidanimation.xlsm
     window.location = newLocation
 
-    // setTimeout(() => {
-    //     window.close()
-    // }, 1000)
+    setTimeout(() => {
+        window.close()
+    }, 1000)
 })
 
 
