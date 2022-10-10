@@ -51,10 +51,10 @@ chrome.action.onClicked.addListener(() => {
 chrome.tabs.onUpdated.addListener(function (tabId, info, tab) {
     if (info.status == 'complete') {
         /* checking & injecting stuff */
-        console.log('tabId === tab.id: ', tabId === tab.id)
+        // console.log('tabId === tab.id: ', tabId === tab.id)
         console.log('tab.id: ', tab.id)
         console.log('tab.url: ', tab.url)
-        console.log('tab.title: ', tab.title)
+        // console.log('tab.title: ', tab.title)
 
         if (typeof window !== 'undefined') {
             console.log('You are on the browser in background.js')
@@ -98,8 +98,14 @@ async function reBadge(activeInfo) {
         chrome.tabs.get(activeInfo.tabId, function (tab) {
             console.log(tab.url)
             if (tab.url.startsWith('https://www.youtube.com/playlist?list=')) {
+                chrome.storage.local.set({ 'domUrl': tab.url }, function () {
+                    console.log('Value is set to domUrl: ' + tab.url)
+                })
                 chrome.tabs.sendMessage(tab.id, { text: 'report_back' }, doStuffWithDom)
             } else if ((tab.url.startsWith('https://www.youtube.com/channel/') || tab.url.startsWith('https://www.youtube.com/user/') || tab.url.startsWith('https://www.youtube.com/c/')) && (tab.url.endsWith('/videos') || tab.url.endsWith('/playlists'))) {
+                chrome.storage.local.set({ 'domUrl': tab.url }, function () {
+                    console.log('Value is set to domUrl: ' + tab.url)
+                })
                 chrome.tabs.sendMessage(tab.id, { text: 'report_back_playlists_videos', linkage: tab.url }, doStuffWithDom)
             } else {
                 console.log('reset badge here')
