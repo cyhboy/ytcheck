@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+
 // Listen for messages
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
     // If the received message has the expected format...
@@ -12,14 +13,11 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
     }
 
     if (msg.text === 'report_back') {
-        // if (sender.status == 'complete') {
-        // Call the specified callback, passing
-        // the web-page's DOM content as argument
 
         let author = ''
         let title = ''
         let cnt = 0
-        //document.addEventListener('DOMContentLoaded', function () {
+
         while (document.readyState !== 'complete' || author == '' || title == '') {
             sleep(1000)
             try {
@@ -51,20 +49,13 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
 
         let domContent = author + '_' + title
 
-        // chrome.storage.local.set({ 'domContent': domContent }, function () {
-        //     console.log('Value is set to ' + domContent)
-        // })
-
         sendResponse(domContent)
-        //}, false)
-        // }
+
         return true
     }
 
     if (msg.text === 'report_back_playlists_videos') {
-        // if (sender.status == 'complete') {
-        // Call the specified callback, passing
-        // the web-page's DOM content as argument
+
         let author = ''
         let title = ''
         let cnt = 0
@@ -87,9 +78,6 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
             author = document.querySelector('#text-container > yt-formatted-string').textContent
         }
 
-        //document.addEventListener('DOMContentLoaded', function () {
-
-
         title = msg.linkage
 
         author = author.replace(/[/\\?\-，, +()（）%*：:|"<>]/g, '')
@@ -101,13 +89,8 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
 
         let domContent = author + '_' + title
 
-        // chrome.storage.local.set({ 'domContent': domContent }, function () {
-        //     console.log('Value is set to ' + domContent)
-        // })
-
         sendResponse(domContent)
-        //}, false)
-        // }
+
         return true
     }
 
