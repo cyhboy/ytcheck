@@ -67,23 +67,28 @@ chrome.tabs.onUpdated.addListener(function (tabId, info, tab) {
         // chrome.action.getBadgeBackgroundColor({}, (res) => {
         //     console.log(JSON.stringify(res))
         // })
-
-        if (tab.url.startsWith('https://www.youtube.com/playlist?list=')) {
-            console.log('get the youtube playlist linkage')
-            chrome.storage.local.set({ 'domUrl': tab.url }, function () {
-                console.log('Value is set to domUrl: ' + tab.url)
-            })
-            chrome.tabs.sendMessage(tab.id, { text: 'report_back' }, doStuffWithDom)
-        } else if ((tab.url.startsWith('https://www.youtube.com/channel/') || tab.url.startsWith('https://www.youtube.com/user/') || tab.url.startsWith('https://www.youtube.com/c/')) && (tab.url.endsWith('/videos') || tab.url.endsWith('/playlists'))) {
-            console.log('get the youtube playlists or videos linkage')
-            chrome.storage.local.set({ 'domUrl': tab.url }, function () {
-                console.log('Value is set to domUrl: ' + tab.url)
-            })
-            chrome.tabs.sendMessage(tab.id, { text: 'report_back_playlists_videos', linkage: tab.url }, doStuffWithDom)
-        } else {
-            chrome.action.setBadgeText({ text: '' }, () => { })
-            chrome.action.setBadgeBackgroundColor({ color: [0, 0, 0, 0] }, () => { })
-            chrome.action.setTitle({ title: '' }, () => { })
+        
+        try {
+            if (tab.url.startsWith('https://www.youtube.com/playlist?list=')) {
+                console.log('get the youtube playlist linkage')
+                chrome.storage.local.set({ 'domUrl': tab.url }, function () {
+                    console.log('Value is set to domUrl: ' + tab.url)
+                })
+                chrome.tabs.sendMessage(tab.id, { text: 'report_back' }, doStuffWithDom)
+            } else if ((tab.url.startsWith('https://www.youtube.com/channel/') || tab.url.startsWith('https://www.youtube.com/user/') || tab.url.startsWith('https://www.youtube.com/c/')) && (tab.url.endsWith('/videos') || tab.url.endsWith('/playlists'))) {
+                console.log('get the youtube playlists or videos linkage')
+                chrome.storage.local.set({ 'domUrl': tab.url }, function () {
+                    console.log('Value is set to domUrl: ' + tab.url)
+                })
+                chrome.tabs.sendMessage(tab.id, { text: 'report_back_playlists_videos', linkage: tab.url }, doStuffWithDom)
+            } else {
+                chrome.action.setBadgeText({ text: '' }, () => { })
+                chrome.action.setBadgeBackgroundColor({ color: [0, 0, 0, 0] }, () => { })
+                chrome.action.setTitle({ title: '' }, () => { })
+            }
+            console.log('Success to ytcheck for ' + tab.url)
+        } catch (error) {
+            console.error(error)
         }
     }
 })
@@ -115,7 +120,7 @@ async function reBadge(activeInfo) {
             }
         })
 
-        console.log('Success.')
+        console.log('Success to reBadge for ' + tab.url)
     } catch (error) {
         console.error(error)
     }
