@@ -1,0 +1,46 @@
+{
+    "manifest_version": 3,
+    "name": "ytcheck",
+    "version": "1.0",
+    "description": "for my youtube development",
+    "host_permissions": [
+        "https://www.youtube.com/playlist?list=*",
+        "https://www.youtube.com/channel/*/videos",
+        "https://www.youtube.com/c/*/videos",
+        "https://www.youtube.com/user/*/videos",
+        "https://www.youtube.com/channel/*/playlists",
+        "https://www.youtube.com/c/*/playlists",
+        "https://www.youtube.com/user/*/playlists"
+    ],
+    "permissions": [
+        "activeTab",
+        "tabs",
+        "storage"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.youtube.com/playlist?list=*",
+                "https://www.youtube.com/channel/*/videos",
+                "https://www.youtube.com/c/*/videos",
+                "https://www.youtube.com/user/*/videos",
+                "https://www.youtube.com/channel/*/playlists",
+                "https://www.youtube.com/c/*/playlists",
+                "https://www.youtube.com/user/*/playlists"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "run_at": "document_idle"
+        }
+    ],
+    "action": {
+        "default_title": "",
+        "default_icon": {
+            "32": "builder-icon.png"
+        }
+    }
+}
