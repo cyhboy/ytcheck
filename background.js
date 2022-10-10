@@ -99,7 +99,7 @@ async function reBadge(activeInfo) {
             console.log(tab.url)
             if (tab.url.startsWith('https://www.youtube.com/playlist?list=')) {
                 chrome.tabs.sendMessage(tab.id, { text: 'report_back' }, doStuffWithDom)
-            } else if ((tab.url.startsWith('https://www.youtube.com/channel/') || tab.url.startsWith('https://www.youtube.com/user/')) && (tab.url.endsWith('/videos') || tab.url.endsWith('/playlists'))) {
+            } else if ((tab.url.startsWith('https://www.youtube.com/channel/') || tab.url.startsWith('https://www.youtube.com/user/') || tab.url.startsWith('https://www.youtube.com/c/')) && (tab.url.endsWith('/videos') || tab.url.endsWith('/playlists'))) {
                 chrome.tabs.sendMessage(tab.id, { text: 'report_back_playlists_videos', linkage: tab.url }, doStuffWithDom)
             } else {
                 console.log('reset badge here')
