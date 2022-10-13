@@ -3,6 +3,12 @@
     "name": "ytcheck",
     "version": "1.0",
     "description": "for my youtube development",
+    "icons": {
+        "128": "builder-icon.png",
+        "48": "builder-icon.png",
+        "32": "builder-icon.png",
+        "16": "builder-icon.png"
+    },
     "host_permissions": [
         "https://www.youtube.com/playlist?list=*",
         "https://www.youtube.com/channel/*/videos",
