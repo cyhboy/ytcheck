@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "ytcheck",
     "version": "1.0",
-    "description": "for my youtube development",
+    "description": "for my youtube development version 3",
     "icons": {
         "128": "builder-icon.png",
         "48": "builder-icon.png",

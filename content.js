@@ -17,21 +17,30 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
 
         let author = ''
         let title = ''
-        let cnt = 0
 
-        while (document.readyState !== 'complete' || author == '' || title == '') {
-            sleep(1000)
+
+        if (document.readyState !== 'complete') {
             try {
-                author = document.querySelector('#text > a').text
+                if (author == '') {
+                    author = document.querySelector('#text > a').text
+                }
                 title = document.querySelector('#title > yt-formatted-string > a').text
             } catch (error) {
+                console.error(error)
                 author = ''
+                sleep(1000)
+            }
+
+            try {
+                if (title == '') {
+                    title = document.querySelector('#title > yt-formatted-string > a').text
+                }
+            } catch (error) {
+                console.error(error)
                 title = ''
+                sleep(1000)
             }
-            cnt = cnt + 1
-            if (cnt == 3) {
-                break
-            }
+
         }
 
         if (author == '') {
@@ -47,7 +56,7 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
 
         // author = author.replace(/[^\w\s]/gi, '')
         // title = title.replace(/[^\w\s]/gi, '')
-        
+
         console.log('author: ', author)
         console.log('title: ', title)
 
@@ -62,19 +71,16 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
 
         let author = ''
         let title = ''
-        let cnt = 0
-        while (document.readyState !== 'complete' || author == '') {
-            sleep(1000)
-            try {
-                author = document.querySelector('#text > a').text
 
-            } catch (error) {
-                console.log(error)
-                author = ''
-            }
-            cnt = cnt + 1
-            if (cnt == 3) {
-                break
+        if (document.readyState !== 'complete') {
+            if (author == '') {
+                try {
+                    author = document.querySelector('#text > a').text
+                } catch (error) {
+                    console.log(error)
+                    author = ''
+                    sleep(1000)
+                }
             }
         }
 
